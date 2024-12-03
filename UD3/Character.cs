@@ -5,6 +5,10 @@ using UnityEngine;
 public class Character
 {
 
+    /** 
+     * La clase Character sirve para ejemplificar los modificadores de acceo
+     */
+
     //Character Fase 1*************************
 
     //El nombre de player será una propiedad pública que puede ser accedida desde fuera de la clase.
@@ -63,7 +67,7 @@ public class Character
         //El setter establece el valor de la propiedad
         set
         {
-            _health = Mathf.Max(0, value); // Asegura que la salud no sea negativa (si el valor es negativo,le asignará 0)
+            _health = Mathf.Max(0, value); // Asegura que la salud no sea negativa (si el valor es negativo,le asignará 0) VALIDACIÓN
             if (_health == 0)
                 Die();
         }
@@ -81,7 +85,7 @@ public class Character
     //El método Die sólo es accesible desde el interior de la clase. Se llama en el setter de health
     private void Die()
     {
-        Debug.Log($"{playerName} has died.");
+        Debug.Log(this.playerName+" has died.");
        
     }
     
@@ -94,10 +98,12 @@ public class Character
         }
     }
 
+    //Fase 6: MÉTODO VIRTUAL
     //Se define un método virtual que se reescribirá en las clases derivadas
     public virtual void ShowMessage()
     {
         Debug.Log("**********************INFORME DE PERSONAJE *****************************");
+
     }
 
    
