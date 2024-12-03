@@ -11,7 +11,7 @@ public class Play : MonoBehaviour
 
 //Fase 6
      Player player;
-    //Creamos un nuevo objeto de tipo Player para probar los atributos est·ticos.
+    //Creamos un nuevo objeto de tipo Player para probar los atributos est√°ticos.
     Player player2;
 
 //Fase 7
@@ -19,7 +19,7 @@ public class Play : MonoBehaviour
 
    
 
-    //Es conveniente evitar los "valores m·gicos" asignados literalmente. Por eso definimos campos p˙blicos que
+    //Es conveniente evitar los "valores m√°gicos" asignados literalmente. Por eso definimos campos p√∫blicos que
     //pueden ser serializados.
     public string namePersonnaje = "General";
     public int healthPersonaje=10;
@@ -45,14 +45,13 @@ public class Play : MonoBehaviour
     public int levelPlayer2 = 0;
     public int strength2 = 2;
 
-    //ConfiguraciÛn para un enemigo genÈrico
+    //Configuraci√≥n para un enemigo gen√©rico
    
     public int healthEnemyG = 10;
     public int speedEnemyG = 5;
     public int levelEnemyG = 1;
     public int bulletsG = 100;
 
-    private bool keyE;
 
   
 
@@ -61,8 +60,8 @@ public class Play : MonoBehaviour
     void Start()
     {
         //Inicializamos el jugador
-        //Los valores que se pasan al constructor se pueden pasar como "valores m·gicos" (lo cual es conveniente evitar)
-        //o bien como campos que pueden ser configurados mediante serializaciÛn.
+        //Los valores que se pasan al constructor se pueden pasar como "valores m√°gicos" (lo cual es conveniente evitar)
+        //o bien como campos que pueden ser configurados mediante serializaci√≥n.
 
         //Constructor en Fase 1
         //personaje = new Character(namePersonaje);
@@ -74,45 +73,45 @@ public class Play : MonoBehaviour
         //personaje = new Character(namePersonnaje, healthPersonaje,speedPersonaje);
 
         //Constructor en Fase 4
-        //INICIALIZACI”N DEL PERSONAJE B¡SICO***********************************************
+        //INICIALIZACI√ìN DEL PERSONAJE B√ÅSICO***********************************************
         personaje = new Character(namePersonnaje, healthPersonaje, speedPersonaje, levelPersonaje);
 
 
 
-        //Podemos mostrar por consola directamente el nombre del player porque es un campo p˙blico.
+        //Podemos mostrar por consola directamente el nombre del player porque es un campo p√∫blico.
         Debug.Log("Nombre del personaje: "+ personaje.playerName);
 
-        //Debug.Log(player.health);//Esta lÌnea produce un error de compilaciÛn porque health es un campo private
+        //Debug.Log(player.health);//Esta l√≠nea produce un error de compilaci√≥n porque health es un campo private
         Debug.Log("El personaje comienza con Health: "+ personaje.Health); //Accedemos al campo privado health mediante la propiedad Health (getter)
 
         Debug.Log("Velocidad inicial del personaje: "+ personaje.speed);
 
         Debug.Log("Nivel inicial del personaje: " + personaje.Level);
 
-        //Se llama a la implementaciÛn del mÈtodo ShowMessage definida en la clase Character
+        //Se llama a la implementaci√≥n del m√©todo ShowMessage definida en la clase Character
         personaje.ShowMessage();
 
-        //INICIALIZACI”N DEL PLAYER ************************************************************
+        //INICIALIZACI√ìN DEL PLAYER ************************************************************
         player = new Player(namePlayer, healthPlayer, speedPlayer, levelPlayer, strength);
 
         Debug.Log("Name player: " + player.playerName);
         Debug.Log("Health player: " + player.Health); //Accedemos al campo privado health mediante la propiedad Health (getter)
         Debug.Log("Speed player: " + player.speed);
-        //Debug.Log("Level player: " + player._level);//Esta lÌnea produce un error ya que _level es protected
+        //Debug.Log("Level player: " + player._level);//Esta l√≠nea produce un error ya que _level es protected
         Debug.Log("Level player: " + player.Level);
 
-        //Se llama a la REDEFINICI”N del mÈtodo ShowMessage() (mÈtodo virtual)
+        //Se llama a la REDEFINICI√ìN del m√©todo ShowMessage() (m√©todo virtual)
         player.ShowMessage();
 
-        //INICIALIZACI”N DEL ENEMY ************************************************************
+        //INICIALIZACI√ìN DEL ENEMY ************************************************************
         enemy = new Enemy(nameEnemy, healthEnemy, speedEnemy, levelEnemy, bullets);
-        //Como Enemy no redefine el mÈtodo ShowMessage, utiliza el de la clase base
+        //Como Enemy no redefine el m√©todo ShowMessage, utiliza el de la clase base
         enemy.ShowMessage();
-        Statistics.enemies.Add(enemy);//Para que estÈn todos los enemigos en la lista hay que meterlo
+        Statistics.enemies.Add(enemy);//Para que est√©n todos los enemigos en la lista hay que meterlo
 
 
         player2 = new Player(namePlayer2, healthPlayer2, speedPlayer2, levelPlayer2, strength2);
-        //Uso de clase est·tica VectorUtils***********************************************
+        //Uso de clase est√°tica VectorUtils***********************************************
         //Vector3 pointA = new Vector3(0, 0, 0);
         //Vector3 pointB = new Vector3(3, 4, 0);
 
@@ -120,7 +119,7 @@ public class Play : MonoBehaviour
         //Debug.Log("Distancia entre los puntos: " + distance);
 
         //Vector3 direction = VectorUtils.CalculateDirection(pointA, pointB);
-        //Debug.Log("DirecciÛn de A --> B: " + direction);
+        //Debug.Log("Direcci√≥n de A --> B: " + direction);
 
         //Vector3 randomPoint = VectorUtils.GetRandomPoint(Vector3.zero, 5.0f);
         //Debug.Log("Punto aleatorio alrededor de un punto: " + randomPoint);
@@ -138,22 +137,22 @@ public class Play : MonoBehaviour
             Debug.Log(personaje.Health);
         }
         
-        //Incrementaremmos el nivel del personaje en cada Frame (asÌ probamos getter y setter)
+        //Incrementaremmos el nivel del personaje en cada Frame (as√≠ probamos getter y setter)
         //personaje.Level+=100;
         //Debug.Log("Nivel actual del personaje: "+ personaje.Level);
 
-        //Probamos el mÈtodo TakeDamage implementado en la clase base Character.
+        //Probamos el m√©todo TakeDamage implementado en la clase base Character.
         if (Input.GetKey(KeyCode.Space))
         {
             enemy.TakeDamage(1);
         }
-        //Probamos el mÈtodo Shoot implementado en la clase derivada Enemy
+        //Probamos el m√©todo Shoot implementado en la clase derivada Enemy
         if (Input.GetKey(KeyCode.Backspace))
         {
             enemy.Shoot();  
         }
 
-        //Cada vez que pulsemos la tecla E se crea un nuevo enemigo hasta alcanzar el m·ximo.
+        //Cada vez que pulsemos la tecla E se crea un nuevo enemigo hasta alcanzar el m√°ximo.
         if (Input.GetKeyDown(KeyCode.E))
         {
                 if (Enemy.nEnemies < Statistics.MaxEnemies)
@@ -163,7 +162,7 @@ public class Play : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("No se pueden crear m·s enemigos");
+                    Debug.Log("No se pueden crear m√°s enemigos");
                 }         
         }
 
