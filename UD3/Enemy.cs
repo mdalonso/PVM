@@ -3,14 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : Character//, IInteractable
+public class Enemy : Character, IInteractable
 {
 
-    //Propiedad p˙blica con el n˙mero de proyectiles del enemigo
+    //Propiedad p√∫blica con el n√∫mero de proyectiles del enemigo
     public int bulletCount = 100;
 
-    //El campo est·tico nEnemies almacenar· el n˙mero de instancias de la clase Enemy.
-    //Nos servir· para controlar que no se creen m·s del n˙mero m·ximo de enemigos.
+    //El campo est√°tico nEnemies almacenar√° el n√∫mero de instancias de la clase Enemy.
+    //Nos servir√° para controlar que no se creen m√°s del n√∫mero m√°ximo de enemigos.
     public static int nEnemies = 0;
 
 
@@ -19,7 +19,7 @@ public class Enemy : Character//, IInteractable
     {
         this.bulletCount = nBullet;
 
-        //CLASES EST¡TICAS: Cada vez que creamos un enemigo se incrementa para tener constancia de cu·ntos enemigos se han creado.
+        //CLASES EST√ÅTICAS: Cada vez que creamos un enemigo se incrementa para tener constancia de cu√°ntos enemigos se han creado.
         nEnemies++;
 
     }
@@ -34,9 +34,9 @@ public class Enemy : Character//, IInteractable
     }
 
     
-    //public void Interact()
-    //{
-    //    Debug.Log("Enemigo interactuando");
-    //}
+    public void Interact()
+    {
+        Debug.Log("Enemigo interactuando");
+    }
 
 }
