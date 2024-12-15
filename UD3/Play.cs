@@ -167,12 +167,15 @@ public class Play : MonoBehaviour
         }
 
        
+        //Al pulsar la tecla I se llamará a los métodos definidos en la interfaz Interactable.
+       if (Input.GetKeyDown(KeyCode.I))
+        {
+            player.Interact();
+            enemy.Interact(); 
+        }
 
 
-
-
-        //player.Interact();
-        //enemy.Interact();
+       
 
 
     }
