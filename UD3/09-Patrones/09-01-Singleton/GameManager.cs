@@ -7,11 +7,18 @@ public class GameManager : MonoBehaviour
     // Instancia única del Singleton.
     // Esta variable estática es de tipo GameManager.
     //Es una propiedad pública que creará automáticamente un campo private asociado.
+    //Ese campo private debe contener un objeto que tiene asociado el script GameManager
     public static GameManager Instance { get; private set; }
 
     // Variable para almacenar un contador global
-    public int globalCounter = 0;
-
+    //Aquí se deberían incluir todas las variables y estructuras de información que son
+    //globales al juego (Ejemlos: puntuación acumulada, configuración de controles...)
+    private int _globalCounter = 0;
+    public int GlobalCounter
+    {
+        get => _globalCounter;
+        set { _globalCounter = value; }
+    } 
     //Awake se ejecuta cada vez que el objeto al que pertenece el script es instanciado o activado en la escena.
     //Se ejecuta antes de Start. Start se ejecuta antes del primer frame..
     private void Awake()
@@ -38,7 +45,7 @@ public class GameManager : MonoBehaviour
     // Método para incrementar el contador
     public void IncrementCounter()
     {
-        globalCounter++;
-        Debug.Log("Contador global: " + globalCounter);
+        _globalCounter++;
+        Debug.Log("Contador global: " + _globalCounter);
     }
 }
