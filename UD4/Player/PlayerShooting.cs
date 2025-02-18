@@ -8,6 +8,10 @@ public class PlayerShooting : MonoBehaviour
     private bool gunLoaded = true;
     private PlayerAiming playerAiming;
 
+    //Se utiliza Awake para inicializar variables que NO DEPENDEN dde otros objetos.
+    //En este caso, como PlayerAiming pertenece al mismo objeto, lo inicializamos
+    //en el Awake. 
+    //Si la inicialización depende de la existencia de otro objeto se utilizará el método Start()
     private void Awake()
     {
         playerAiming = GetComponent<PlayerAiming>();
