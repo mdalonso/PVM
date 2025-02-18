@@ -12,6 +12,8 @@ public class PlayerShooting : MonoBehaviour
     //En este caso, como PlayerAiming pertenece al mismo objeto, lo inicializamos
     //en el Awake. 
     //Si la inicialización depende de la existencia de otro objeto se utilizará el método Start()
+    //Awake se ejecuta al instanciar el objeto.
+    //Start s ejecuta justo antes del primer update
     private void Awake()
     {
         playerAiming = GetComponent<PlayerAiming>();
