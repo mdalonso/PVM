@@ -34,11 +34,7 @@ public class Enemy : MonoBehaviour
     void TakeDamage()
     {
         _health --;
-        //Reto 2: Destruir el enemigo cuando se agota su vida
-        if (_health <= 0) {
-            Die();
-            
-        }
+       
     }
 
     //Manejo de la colisión entre el proyectil y el enemigo desde el enemigo.
@@ -72,10 +68,6 @@ public class Enemy : MonoBehaviour
         transform.position += (Vector3)direction * Time.deltaTime * _speed;
     }
 
-    private void Die()
-    {
-        Debug.Log("Enemigo destruido");
-        Destroy(gameObject);
-    }
+   
 }
 
