@@ -1,19 +1,31 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private float speed = 5f;
-    private Vector2 moveDirection;
+    float h, v;
 
-    private void Update()
+    Vector3 moveDirection;
+    [SerializeField] int _speed = 5;
+
+
+   
+
+    // Update is called once per frame
+    void Update()
     {
-        HandleMovement();
+        MovePlayerAxis();
     }
 
-    private void HandleMovement()
+    void MovePlayerAxis()
     {
-        moveDirection.x = Input.GetAxis("Horizontal");
-        moveDirection.y = Input.GetAxis("Vertical");
-        transform.position += (Vector3)moveDirection * Time.deltaTime * speed;
+        moveDirection.x = Input.GetAxisRaw("Horizontal");
+        moveDirection.y = Input.GetAxisRaw("Vertical");
+
+        //transform.position += moveDirection*Time.deltaTime*_speed;
+        transform.Translate(moveDirection.normalized * Time.deltaTime * _speed);
     }
+
+
 }

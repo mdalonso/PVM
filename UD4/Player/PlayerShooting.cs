@@ -1,25 +1,26 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerShooting : MonoBehaviour
 {
-    [SerializeField] private Transform bulletPrefab;
-    [SerializeField] private float fireRate = 5f;
-    private bool gunLoaded = true;
-    private PlayerAiming playerAiming;
 
-    //Se utiliza Awake para inicializar variables que NO DEPENDEN dde otros objetos.
-    //En este caso, como PlayerAiming pertenece al mismo objeto, lo inicializamos
-    //en el Awake. 
-    //Si la inicializaci√≥n depende de la existencia de otro objeto se utilizar√° el m√©todo Start()
-    //Awake se ejecuta al instanciar el objeto.
-    //Start s ejecuta justo antes del primer update
+    [SerializeField] Transform bulletPrefab;
+
+    bool gunLoaded = true;//Indica si el arma est· cargada
+
+    [SerializeField] int fireRate = 1; //N∫ de proyectiles por segundo
+
+    PlayerAiming playerAiming;
+    // Start is called before the first frame update
+
     private void Awake()
     {
         playerAiming = GetComponent<PlayerAiming>();
     }
 
-    private void Update()
+    // Update is called once per frame
+    void Update()
     {
         if (Input.GetMouseButtonDown(0) && gunLoaded)
         {
@@ -27,19 +28,22 @@ public class PlayerShooting : MonoBehaviour
         }
     }
 
-    private void ShootBullet()
+    void ShootBullet()
     {
         gunLoaded = false;
+        //float angle=Mathf.Atan2(seno,coseno)
+
         float angle = Mathf.Atan2(playerAiming.GetFacingDirection().y, playerAiming.GetFacingDirection().x) * Mathf.Rad2Deg;
-        Quaternion targetRotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        Vector3 eje = new Vector3(0, 0, 1);
+        Quaternion targetRotation = Quaternion.AngleAxis(angle, new Vector3(0, 0, 1));
         Instantiate(bulletPrefab, transform.position, targetRotation);
+
         StartCoroutine(ReloadGun());
     }
 
-    private IEnumerator ReloadGun()
+    IEnumerator ReloadGun()
     {
         yield return new WaitForSeconds(1 / fireRate);
         gunLoaded = true;
     }
 }
-
