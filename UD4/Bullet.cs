@@ -7,11 +7,22 @@ public class Bullet : MonoBehaviour
     //_speed es un campo privado quue está serializado para que aparezca en el inspector
     [SerializeField] float _speed = 5;
 
+    //ESTRUCTURAS DE DATOS PARA IMPLEMENTAR EL POWERUP POWERSHOT**************
+    //powerShot permite determinar si el proyectil instanciado es un PowerShot o un proyectil normal (PowerUp)
+    bool powerShot;
+    //_health está asociado al powerShot y determina a cuántos enemigos puede matar un proyectil.
+    //Se serializa para poder modificarlo desde el inspector como una configuración más.
+    [SerializeField] int _health = 3;
+
     public float Speed
     {
         get { return _speed; }
         set { _speed = value; }
     }
+
+    //Se crean propiedades para poder acceder a estas variables privadas.
+    public bool PowerShot { get { return powerShot; } set { powerShot = value; } }
+    public int Health { get { return _health; } set { _health = value; } }
 
     private void Start()
     {
