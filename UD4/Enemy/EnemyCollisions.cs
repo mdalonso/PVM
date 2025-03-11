@@ -24,9 +24,24 @@ public class EnemyCollisions : MonoBehaviour
             //Se necesita acceder al componente Bullet del proyectil porque su comportamiento será diferente si se trata de un "superproyectil" o no.
             Bullet bullet = collision.GetComponent<Bullet>();
             //Si la colisión se produce con un proyectil, llamamos al método TakeDamage para restarle vida
-          
-            Destroy(collision.gameObject);
-           
+            _enemyHealth.TakeDamage();
+            //Si no se trata de un superproyectil...
+            if (!bullet.PowerShot)
+            {
+                //...lo destruimos
+                Destroy(collision.gameObject);
+            }
+            else //Si se trata de un superproyectil
+            {
+                //...le quitamos vida a ese proyectil para permitirle seguir su recorrido
+                bullet.Health--;
+                if (bullet.Health <= 0)
+                {
+                    //Si choca con el número máximo de enemigos permitido lo destruimos.
+                    Destroy(collision.gameObject);
+                }
+            }
+
         }
 
 
