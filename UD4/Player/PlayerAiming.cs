@@ -1,28 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerAiming : MonoBehaviour
 {
-    [SerializeField] Transform _aim;
-    Vector2 _facingDirection;
-   
-   
-    // Update is called once per frame
-    void Update()
+    [SerializeField] private Transform aim;
+    private Vector2 facingDirection;
+
+    private void Update()
     {
-        Aiming();
+        HandleAiming();
     }
 
-    void Aiming()
+    private void HandleAiming()
     {
-        _facingDirection = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-        _aim.position = transform.position + (Vector3)_facingDirection.normalized;
-
+        facingDirection = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+        aim.position = transform.position + (Vector3)facingDirection.normalized;
     }
 
     public Vector2 GetFacingDirection()
     {
-        return _facingDirection;
+        return facingDirection;
     }
 }
