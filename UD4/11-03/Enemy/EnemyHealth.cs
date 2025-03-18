@@ -8,7 +8,7 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField, Tooltip("Vida del enemigo")] int _health = 1; //vida
 
 
-    //[SerializeField] GameStats _gameStats;
+    [SerializeField] GameStats _gameStats;
 
     public void TakeDamage()
     {
@@ -25,7 +25,7 @@ public class EnemyHealth : MonoBehaviour
     {
         Debug.Log("Enemigo destruido");
         //UTILIZANDO SCRIPTABLE OBJECTS EN EL GAME MANAGER*********************
-        //_gameStats.score += _gameStats.scorePoints;
+        _gameStats.Score += _gameStats.ScorePoints;
         //UTILIZANDO SINGLETON EN EL GAME MANAGER ******************
         //GameManager.Instance.Score += GameManager.Instance.ScorePoints;
 
