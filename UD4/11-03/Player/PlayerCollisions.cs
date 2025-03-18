@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerCollisions : MonoBehaviour
@@ -21,10 +22,10 @@ public class PlayerCollisions : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Enemy"))
-        {
-            _playerHealth.TakeDamage();
-        }
+        //if (collision.CompareTag("Enemy"))
+        //{
+        //    _playerHealth.TakeDamage();
+        //}
 
         if (collision.CompareTag("PowerUp"))
         {
@@ -43,5 +44,13 @@ public class PlayerCollisions : MonoBehaviour
             Destroy(collision.gameObject);
         }
        
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            _playerHealth.TakeDamage();
+        }
     }
 }
