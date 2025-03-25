@@ -1,53 +1,58 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private float _speed = 5f;
-    private Vector2 moveDirection;
+    float h, v;
 
-    //Propiedad para acceder al campo _speed
-    public float Speed { get { return _speed; } set { _speed = value; } }
+    Vector3 moveDirection;
+    [SerializeField] float _speed = 5;
 
-    //La variable water contendrá un array con todos los elementos agua que hay enla escena
-    //con el fin de suscribir el player a los eventos declarados en todos los elementos Water de la escena.
-    Water[] water;
+    [SerializeField] Animator _anim;
+
+
+    Water[] _water;
+
 
     private void Start()
     {
-        //SUSCRIBIMOS EL PLAYER A LOS EVENTOS QUE CONTROLAN EL EFECTO DEL AGUA SOBRE LA VELOCIDAD DEL PLAYER*************
-
-        //Inicializamos water localizando todos los elementos Water que hay en la escena, los cuales tienen definidos los eventos
-        //de respuesta del player
-        water=FindObjectsOfType<Water>();
-        //Recorremos el array para suscirbirnos a los eventos de todos los elementos Water.
-        foreach(Water w in water)
+        _water=FindObjectsOfType<Water>();
+        //suscripción a eventos
+        foreach (Water w in _water)
         {
-            //La suscripción indica que cuando se produzca el evento OnWater, responderemos con el método DecreaseSpeed
             w.OnWater += DecreaseSpeed;
+            w.OnGround += RecoverySpeed;
 
-            //La suscripción indica que cuando se produzca el evento OnGround, responderemos con el método RecoverSpeed
-            w.OnGround += RecoverSpeed;
         }
     }
-    private void Update()
+    // Update is called once per frame
+    void Update()
     {
-        HandleMovement();
+        MovePlayerAxis();
     }
 
-    private void HandleMovement()
+    void MovePlayerAxis()
     {
-        moveDirection.x = Input.GetAxis("Horizontal");
-        moveDirection.y = Input.GetAxis("Vertical");
-        transform.position += (Vector3)moveDirection * Time.deltaTime * _speed;
+        moveDirection.x = Input.GetAxisRaw("Horizontal");
+        moveDirection.y = Input.GetAxisRaw("Vertical");
+
+        //transform.position += moveDirection*Time.deltaTime*_speed;
+        transform.Translate(moveDirection.normalized * Time.deltaTime * _speed);
+        _anim.SetFloat("Speed",moveDirection.magnitude);
     }
 
-    /*** Los siguientes métodos definen la respuesta del player a los evento OnWater y OnGround
-     que se han definido en el script Water*/
+    //Métodos de respuesta a los eventos OnWater y OnGround
     void DecreaseSpeed(float penaltySpeed)
     {
+
         _speed*=penaltySpeed;
-    }void RecoverSpeed(float penaltySpeed)
+    }
+
+    void RecoverySpeed(float penaltySpeed)
     {
         _speed/=penaltySpeed;
     }
+
+
 }

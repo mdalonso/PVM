@@ -1,23 +1,37 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerAiming : MonoBehaviour
 {
-    [SerializeField] private Transform aim;
-    private Vector2 facingDirection;
+    [SerializeField] Transform _aim;
+    Vector2 _facingDirection;
 
-    private void Update()
+    [SerializeField] SpriteRenderer _spriteRenderer;
+    // Update is called once per frame
+    void Update()
     {
-        HandleAiming();
+        Aiming();
     }
 
-    private void HandleAiming()
+    void Aiming()
     {
-        facingDirection = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-        aim.position = transform.position + (Vector3)facingDirection.normalized;
+        _facingDirection = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+        _aim.position = transform.position + (Vector3)_facingDirection.normalized;
+
+        if (_aim.position.x > transform.position.x)
+        {
+            _spriteRenderer.flipX = true;
+        }
+        else if (_aim.position.x < transform.position.x)
+        {
+            _spriteRenderer.flipX = false;
+        }
+
     }
 
     public Vector2 GetFacingDirection()
     {
-        return facingDirection;
+        return _facingDirection;
     }
 }
