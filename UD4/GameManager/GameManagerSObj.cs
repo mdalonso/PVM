@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManagerSObj : MonoBehaviour
 {
@@ -10,20 +11,31 @@ public class GameManagerSObj : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(CountDownRoutine());
         gameStats.ResetState();
+
+        StartCoroutine(CountDownRoutine());
+
+        UIManager.Instance.UpdateUITime(gameStats.Time);
     }
 
     // Update is called once per frame
    
     IEnumerator CountDownRoutine()
     {
-        while (gameStats.time > 0)
+        while (gameStats.Time > 0)
         {
             yield return new WaitForSeconds(1);
-            gameStats.time--;
+            gameStats.Time--;
         }
+
         Debug.Log("Game over");
+
+        UIManager.Instance.ShowGameOverScreen();
+    }
+
+    public void PlayAgain()
+    {
+        SceneManager.LoadScene("SampleScene");
     }
 
 }
